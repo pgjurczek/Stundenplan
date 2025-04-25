@@ -26,5 +26,8 @@
 		"onlyBuiltDependencies": [
 			"esbuild"
 		]
+	},
+	"dependencies": {
+		"webuntis": "^2.2.1"
 	}
 }
