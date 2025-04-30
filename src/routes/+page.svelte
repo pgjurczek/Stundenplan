@@ -4,4 +4,6 @@
 
 <Navbar />
 
-<a href="/about">About my site</a>
+
+<!--<a href="/about">About my site</a>-->
+

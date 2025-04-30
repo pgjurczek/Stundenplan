@@ -1,4 +1,5 @@
 <script lang="ts">
+    import Navbar from "$lib/components/Navbar.svelte";
     import { onMount } from "svelte";
 
     interface UntisData {
@@ -47,6 +48,7 @@
 
 
 </script>
+<Navbar />
 
 <div class="relative group inline-block text-left">
     <button class="bg-gray-400 px-4 py-2 rounded-2xl hover:bg-blue-700">Plan wählen</button>
@@ -75,14 +77,13 @@
     </div>
 </div>
 
-
 {#if selectedSchool}
   <p class="px-4 py-2">Ausgewählter Plan {selectedSchool.longName}</p>
   <p class="px-4 py-2">Erstes Fach: {data?.timetable[0].startTime} - {data?.timetable[0].sg}</p>
 {/if}
 
 {#if data}
-    <p>Hier Stundenplan anzeigen {data?.timetable[0].sg}</p>
+    <!--<p>Hier Stundenplan anzeigen {data?.timetable[0].sg}</p>-->
 {:else}
     <p>Lade Stundenplan...</p>
 {/if}
