@@ -10,21 +10,42 @@
     let selectedSchool: any = '';
     let searchTerm: string = '';
     
+    let classId: number = 12814;
+
     function selectClass(name: string) {
         selectedSchool = name;
+        classId = selectedSchool.id;
+        fetchUntisData();
+
         console.log("You selected class:", selectedSchool);
-        console.log("Timetable test:", )
+        console.log("n", classId);
+        console.log("Timetable test:", data?.timetable)
     }
-    
-    onMount(async () => {
-        const res = await fetch('/api/untis');
+
+    async function fetchUntisData() {
+        const res = await fetch(`/api/untis?classId=${classId}`);
         const json = await res.json();
         
         data = {
             classes: json[0],
             timetable: json[1],
         };
+    }
+
+
+    function toHHMM(time: string) {
+        console.log(time.length);
+
+        if (time.length > 3) {
+            console.log(time.charAt(2));
+        }
+    }
+    
+    onMount(async () => {
+        fetchUntisData();
     });
+
+
 </script>
 
 <div class="relative group inline-block text-left">
@@ -57,18 +78,33 @@
 
 {#if selectedSchool}
   <p class="px-4 py-2">Ausgewählter Plan {selectedSchool.longName}</p>
+  <p class="px-4 py-2">Erstes Fach: {data?.timetable[0].startTime} - {data?.timetable[0].sg}</p>
 {/if}
 
 {#if data}
-    <p>Hier Stundenplan anzeigen</p>
+    <p>Hier Stundenplan anzeigen {data?.timetable[0].sg}</p>
 {:else}
     <p>Lade Stundenplan...</p>
 {/if}
 
+<p>KlassenID: {classId}</p>
+
+
+
+
+
+
+<!-- 
 <div class="grid grid-flow-col grid-rows-4 gap-4">
     <div> t{data?.timetable[0]}</div>
-    <div>02</div>
+    <div>Test2</div>
     <div>03</div>
     <div>04</div>
     <div>05</div>
 </div>
+
+
+{#if data2}
+    <p>Test3 {data2?.timetable[0]}</p>
+{/if}
+-->
